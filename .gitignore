@@ -1,0 +1,14 @@
+# Source maps (not useful in production)
+*.map
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# Editors
+.vscode/
+.idea/
+
+# Build artifacts (if a bundler is ever added)
+dist/
+node_modules/
