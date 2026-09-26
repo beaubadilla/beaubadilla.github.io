@@ -1,503 +1,523 @@
 <!doctype html>
-<html class="js" lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
-  <title>Beau Jayme Badilla</title>
-  <meta name="description" content="Full Stack Developer portfolio of Beau Jayme Badilla.">
+  <title>Beau Jayme Badilla — AI Engineer</title>
+  <meta name="description" content="AI Engineer portfolio of Beau Jayme Badilla.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="Beau Jayme Badilla — Full Stack Developer">
+  <meta property="og:title" content="Beau Jayme Badilla — AI Engineer">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://beaujb.dev">
   <meta property="og:image" content="https://beaujb-website.s3.amazonaws.com/profile/cover-photo.jpg">
   <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/assets/images/icon.png">
   <link rel="apple-touch-icon" href="/assets/images/icon.png">
-  <meta name="theme-color" content="#fafafa">
+  <meta name="theme-color" content="#14151a">
 
-  <!-- Normalize -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
-  <!-- UIkit 3 -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/css/uikit.min.css">
-  <!-- Nunito font -->
+  <!-- Set theme before paint to avoid a flash of the wrong theme -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var system = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', stored || system);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- UIkit JS (before body so components init correctly) -->
-  <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit-icons.min.js"></script>
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/45c127adde.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 
-<div id="container">
+<!-- =========================================================
+     Inline SVG sprite  (Lucide line icons — ISC; Simple Icons — CC0)
+     ========================================================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- UI + category icons (stroke) -->
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></symbol>
+    <symbol id="i-tv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="15" x="2" y="7" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+    <symbol id="i-utensils" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol>
+    <symbol id="i-gamepad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.544-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.152A4 4 0 0 0 17.32 5z"/></symbol>
+    <symbol id="i-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <!-- Brand marks (fill) -->
+    <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+    <symbol id="i-spotify" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"/></symbol>
+    <symbol id="i-discord" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></symbol>
+  </defs>
+</svg>
 
-  <header>
-    <div class="uk-inline" style="min-width:100%">
-      <img id="cover-photo"
-           src="https://beaujb-website.s3.amazonaws.com/profile/cover-photo.jpg"
-           alt="Beau Badilla in Japan"
-           width="100%"
-           height="100%">
-      <div id="contenthead" class="uk-overlay uk-light uk-position-center">
-        <h1 id="name">Beau Jayme Badilla</h1>
-        <span id="career-title">Full Stack Developer</span>
-      </div>
-    </div>
+<a class="skip-link" href="#main">Skip to content</a>
 
-    <div id="nav-container">
-      <div id="nav-button">
-        <i class="fas fa-bars"></i>
-      </div>
-      <ul id="nav">
-        <li><a class="uk-text-normal" href="#about-me" uk-scroll>About Me</a></li>
-        <li><a class="uk-text-normal" href="#projects" uk-scroll>Projects</a></li>
-        <li><a class="uk-text-normal" href="#contact" uk-scroll>Contact</a></li>
-      </ul>
-    </div>
-  </header>
+<!-- =========================================================
+     Nav
+     ========================================================= -->
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="#top"><span class="brand-prompt">~/</span>beau</a>
 
-  <main>
+    <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+      <svg class="icon" aria-hidden="true"><use href="#i-menu"></use></svg>
+    </button>
 
-    <section id="about-me">
-      <div id="about-me-intro-and-tstack"
-           uk-scrollspy="target:>h2,>p,>div,>i; cls:uk-animation-fade; repeat:true; delay:100;">
+    <ul id="nav-menu" class="nav-menu">
+      <li><a href="#about"><span class="nav-index">01</span> about</a></li>
+      <li><a href="#projects"><span class="nav-index">02</span> projects</a></li>
+      <li><a href="#favorites"><span class="nav-index">03</span> favorites</a></li>
+      <li><a href="#contact"><span class="nav-index">04</span> contact</a></li>
+    </ul>
 
-        <h2 id="introduction-heading">Nice to meet you, I'm Beau.</h2>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">
+      <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"></use></svg>
+      <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"></use></svg>
+    </button>
+  </nav>
+</header>
 
-        <div id="introduction-paragraph">
-          <p>Graduating with a computer science degree was not something I planned, let alone becoming
-          a full stack engineer. After straying away from a veterinarian career path in my second year
-          of community college, I was exposed to computer science for the first time. I wouldn't label
-          myself a standout developer yet, but I'm relentlessly improving every day to become one.
-          I've realized I love learning different things, and building web apps has indirectly
-          encouraged that. They aren't necessarily constrained to a certain industry or field, so
-          whenever I want to learn something new, I can build a web app alongside it.</p>
-          <!-- TODO: update with current career status -->
-          <p>I graduated in December 2019 and have been building and learning ever since, working
-          toward becoming the best engineer I can be.</p>
-        </div>
+<main id="main">
 
-        <h2 id="tech-stack-heading">My Tech Stack</h2>
+  <!-- =========================================================
+       Hero
+       ========================================================= -->
+  <section id="top" class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">~/beau — ai engineer</p>
+      <h1 class="hero-name">Beau Jayme<br>Badilla</h1>
+      <p class="hero-tagline">AI engineer who builds things as an excuse to learn everything else.</p>
 
-        <div id="tech-stack-frontend" class="tech-category">
-          <img class="tstack-icon" id="javascript-img" src="/assets/images/tech/javascript.png" uk-tooltip="title:JavaScript" alt="JavaScript logo" width="64" height="64">
-          <img class="tstack-icon" id="vue-img"        src="/assets/images/tech/vue.png"        uk-tooltip="title:Vue, Vuex, Vue-Router, Vue Test Utils" alt="Vue logo" width="64" height="64">
-          <img class="tstack-icon" id="vuetify-img"    src="/assets/images/tech/vuetify.png"    uk-tooltip="title:Vuetify" alt="Vuetify logo" width="64" height="64">
-          <img class="tstack-icon" id="html5-img"      src="/assets/images/tech/html5.png"      uk-tooltip="title:HTML5" alt="HTML5 logo" width="64" height="64">
-          <img class="tstack-icon" id="css3-img"       src="/assets/images/tech/css3.png"       uk-tooltip="title:CSS3" alt="CSS3 logo" width="64" height="64">
-          <img class="tstack-icon" id="jest-img"       src="/assets/images/tech/jest.png"       uk-tooltip="title:Jest" alt="Jest logo" width="64" height="64">
-        </div>
-
-        <div id="tech-stack-backend" class="tech-category">
-          <img class="tstack-icon" id="express-img" src="/assets/images/tech/express.png" uk-tooltip="title:Express; pos:left" alt="Express logo" width="64" height="64">
-          <img class="tstack-icon" id="python-img"  src="/assets/images/tech/python.png"  uk-tooltip="title:Python; pos:right" alt="Python logo" width="64" height="64">
-        </div>
-
-        <div id="tech-stack-databases" class="tech-category">
-          <img class="tstack-icon" id="firebase-img" src="/assets/images/tech/firebase.png" uk-tooltip="title:Firebase; pos:left" alt="Firebase logo" width="64" height="64">
-          <img class="tstack-icon" id="scylladb-img" src="/assets/images/tech/scylladb.png" uk-tooltip="title:ScyllaDB" alt="ScyllaDB logo" width="64" height="64">
-          <img class="tstack-icon" id="sqlite-img"   src="/assets/images/tech/sqlite.png"   uk-tooltip="title:SQLite; pos:right" alt="SQLite logo" width="64" height="64">
-        </div>
-
-        <div id="tech-stack-os" class="tech-category">
-          <img class="tstack-icon" id="linux-img"   src="/assets/images/tech/linux.png"   uk-tooltip="title:Linux; pos:left" alt="Linux logo" width="64" height="64">
-          <img class="tstack-icon" id="windows-img" src="/assets/images/tech/windows10.png" uk-tooltip="title:Microsoft Windows; pos:right" alt="Microsoft Windows logo" width="64" height="64">
-        </div>
-
-        <div id="tech-stack-misc" class="tech-category">
-          <img class="tstack-icon" id="aws-img"    src="/assets/images/tech/aws.png"    uk-tooltip="title:Amazon Web Services; pos:bottom" alt="AWS logo" width="64" height="64">
-          <img class="tstack-icon" id="nodejs-img" src="/assets/images/tech/nodejs.svg" uk-tooltip="title:Node.js; pos:bottom" alt="Node.js logo" width="64" height="64">
-          <img class="tstack-icon" id="github-img" src="/assets/images/tech/github.png" uk-tooltip="title:GitHub; pos:bottom" alt="GitHub logo" width="64" height="64">
-          <img class="tstack-icon" id="git-img"    src="/assets/images/tech/git.png"    uk-tooltip="title:Git; pos:bottom" alt="Git logo" width="64" height="64">
-          <img class="tstack-icon" id="heroku-img" src="/assets/images/tech/heroku.jpg" uk-tooltip="title:Heroku; pos:bottom" alt="Heroku logo" width="64" height="64">
-        </div>
-
-        <hr id="tech-stack-divider" class="uk-divider-vertical">
-        <i id="icon1" class="fas fa-laptop fa-3x"></i>
-        <i id="icon2" class="fas fa-server fa-3x"></i>
-        <i id="icon3" class="fas fa-database fa-3x"></i>
-        <i id="icon4" class="fas fa-microchip fa-3x"></i>
-        <i id="icon5" class="fas fa-ellipsis-h fa-3x"></i>
-      </div>
-    </section>
-
-    <div>
-      <div id="favorites">
-        <!-- Tiles -->
-        <div id="movies" class="uk-tile uk-tile-muted top-half left-most" data-row="1" data-col="1" data-category="movies">
-          <i class="fas fa-video fa-3x fav-icon"></i> Movies
-        </div>
-        <div id="shows" class="uk-tile uk-tile-muted top-half" data-row="1" data-col="2" data-category="shows">
-          <i class="fas fa-tv fa-3x fav-icon"></i> Shows
-        </div>
-        <div id="sports" class="uk-tile uk-tile-muted top-half" data-row="1" data-col="3" data-category="sports">
-          <i class="fas fa-running fa-3x fav-icon"></i> Sports
-        </div>
-        <div id="food" class="uk-tile uk-tile-muted top-half" data-row="1" data-col="4" data-category="food">
-          <i class="fas fa-utensils fa-3x fav-icon"></i> Food
-        </div>
-        <div id="games" class="uk-tile uk-tile-muted left-most" data-row="2" data-col="1" data-category="games">
-          <i class="fas fa-gamepad fa-3x fav-icon"></i> Games
-        </div>
-        <div id="travel" class="uk-tile uk-tile-muted" data-row="2" data-col="2" data-category="travel">
-          <i class="fas fa-plane-departure fa-3x fav-icon"></i> Travel
-        </div>
-        <div id="anime" class="uk-tile uk-tile-muted" data-row="2" data-col="3" data-category="anime">
-          <img id="anime-icon-black" src="/assets/images/platforms/crunchyroll-black.png" alt="Crunchyroll" width="64" height="auto">
-          <img id="anime-icon-white" src="/assets/images/platforms/crunchyroll-white.png" alt="Crunchyroll" width="64" height="auto">
-          Anime
-        </div>
-        <div id="music" class="uk-tile uk-tile-muted" data-row="2" data-col="4" data-category="music">
-          <i class="fas fa-music fa-3x fav-icon"></i> Music
-        </div>
-
-        <!-- Movies slider -->
-        <div id="movies-slider" class="slider-grid" style="display:none;grid-row:1/3;grid-column:2/5;height:fit-content">
-          <div class="uk-position-relative uk-visible-toggle uk-light uk-slider-container uk-animation-scale-up" uk-slider>
-            <ul class="uk-slider-items">
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/avengers.jpg" alt="Marvel Cinematic Universe" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Marvel Cinematic Universe</u></span><br><span class="slide-caption">Top 3: <i>Iron Man, Spider-Man: Homecoming, Thor: Ragnarok</i></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/lilo-stitch.jpg" alt="Lilo and Stitch" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Disney Animation</u></span><br><span class="slide-caption">Top 3: <b>Lilo &amp; Stitch</b>, Big Hero 6, Wreck-It Ralph</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/fast-5.jpg" alt="Fast Five" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Fast Five</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/crazy-stupid-love.jpg" alt="Crazy Stupid Love" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Crazy, Stupid, Love</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/inside-out.jpg" alt="Inside Out" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Pixar</u></span><br><span class="slide-caption">Top 3: <b>Inside Out</b>, Toy Story, Ratatouille</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/httyd.jpg" alt="How to Train Your Dragon" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">How to Train Your Dragon</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/social-network.jpg" alt="The Social Network" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">The Social Network</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/rush-hour.jpg" alt="Rush Hour" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Rush Hour</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/martian.jpg" alt="The Martian" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">The Martian</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/21-jump-street.jpg" alt="21 Jump Street" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">21|22 Jump Street</span></div></div></div></li>
-            </ul>
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-          </div>
-        </div>
-        <!-- Shows slider -->
-        <div id="shows-slider" class="slider-grid" style="display:none;grid-row:1/3;grid-column:2/5;height:fit-content">
-          <div class="uk-position-relative uk-visible-toggle uk-light uk-slider-container uk-animation-scale-up" uk-slider>
-            <ul class="uk-slider-items">
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/atla-lok.jpg" alt="Avatar: The Last Airbender" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Avatar: The Last Airbender</span><br><span class="slide-caption">The Legend of Korra</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/suits.jpg" alt="Suits" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Suits</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/mr-robot.jpg" alt="Mr. Robot" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Mr. Robot</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/modern-family.jpg" alt="Modern Family" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Modern Family</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/young-justice.jpg" alt="Young Justice" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Young Justice</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/newsroom.jpg" alt="The Newsroom" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">The Newsroom</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/teen-titans.jpg" alt="Teen Titans" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Teen Titans</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/silicon-valley.jpg" alt="Silicon Valley" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Silicon Valley</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/brooklyn-nine-nine.jpg" alt="Brooklyn Nine-Nine" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Brooklyn Nine-Nine</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/sex-education.jpg" alt="Sex Education" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Sex Education</span></div></div></div></li>
-            </ul>
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-          </div>
-        </div>
-        <!-- Games slider -->
-        <div id="games-slider" class="slider-grid" style="display:none;grid-row:1/3;grid-column:2/5;height:fit-content">
-          <div class="uk-position-relative uk-visible-toggle uk-light uk-slider-container uk-animation-scale-up" uk-slider>
-            <ul class="uk-slider-items">
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/league-of-legends.jpg" alt="League of Legends" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">League of Legends</span><br><span class="slide-caption"><i>Favorite Champions: Fiora, Vayne, Ziggs</i></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/overwatch.jpg" alt="Overwatch" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Overwatch</span><br><span class="slide-caption"><i>Favorite Heroes: Widowmaker, Tracer, Ana</i></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/wow.jpg" alt="World of Warcraft" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">World of Warcraft</span><br><span class="slide-caption"><i>Favorite Classes: Subtlety Rogue, Frost Mage, Beast Mastery Hunter</i></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/arknights.jpg" alt="Arknights" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Arknights</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/counter-strike.jpg" alt="Counter-Strike" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Counter-Strike</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/nba2k.jpg" alt="NBA 2K" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">NBA 2K</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/valorant.jpg" alt="Valorant" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Valorant</span><br><span class="slide-caption"><i>Favorite Agents: Jett, Breach, Cypher</i></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/kingdom-hearts.jpg" alt="Kingdom Hearts" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Kingdom Hearts</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/smash-bros.jpg" alt="Super Smash Bros" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Super Smash Bros.</span><br><span class="slide-caption"><i>Favorite Fighters: Toon Link, Zelda, Luigi</i></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/maplestory.jpg" alt="Maplestory" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Maplestory</span></div></div></div></li>
-            </ul>
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-          </div>
-        </div>
-        <!-- Anime slider -->
-        <div id="anime-slider" class="slider-grid" style="display:none;grid-row:1/3;grid-column:2/5;height:fit-content">
-          <div class="uk-position-relative uk-visible-toggle uk-light uk-slider-container uk-animation-scale-up" uk-slider>
-            <ul class="uk-slider-items">
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/sao.jpg" alt="Sword Art Online" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Sword Art Online</span><br><span class="slide-caption">Sword Art Online II</span><br><span class="slide-caption">Sword Art Online: Alicization</span><br><span class="slide-caption">Sword Art Online Movie: Ordinal Scale</span><br><span class="slide-caption">Sword Art Online: Alicization - War of Underworld</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/fate.jpg" alt="Fate series" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Fate/Zero</span><br><span class="slide-caption">Fate/stay night: Unlimited Blade Works</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/fmab.jpg" alt="Fullmetal Alchemist Brotherhood" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Fullmetal Alchemist: Brotherhood</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/oregairu.jpg" alt="Oregairu" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Yahari Ore no Seishun Love Comedy wa Machigatteiru.</span><br><i class="slide-caption">(My Teen Romantic Comedy SNAFU)</i></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/haikyuu.jpg" alt="Haikyuu" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Haikyuu!!</span><br><span class="slide-caption">Haikyuu!!: To the Top</span><br><span class="slide-caption">Haikyuu!! Karasuno Koukou vs. Shiratorizawa Gakuen Koukou</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/spirited-away.jpg" alt="Spirited Away" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Sen to Chihiro no Kamikakushi</span><br><i class="slide-caption">(Spirited Away)</i></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/digimon.jpg" alt="Digimon" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Digimon: Digital Monsters</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/rent-a-girlfriend.jpg" alt="Rent-a-Girlfriend" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Kanojo, Okarishimasu</span><br><i class="slide-caption">(Rent-a-Girlfriend)</i></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/sakurasou.jpg" alt="Sakurasou no Pet na Kanojo" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Sakura-sou no Pet na Kanojo</span><br><i class="slide-caption">(The Pet Girl of Sakurasou)</i></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/no-game-no-life.jpg" alt="No Game No Life" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">No Game No Life</span></div></div></div></li>
-            </ul>
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-          </div>
-        </div>
-        <!-- Travel slider -->
-        <div id="travel-slider" class="slider-grid" style="display:none;grid-row:1/3;grid-column:2/5;height:fit-content">
-          <div class="uk-position-relative uk-visible-toggle uk-light uk-slider-container uk-animation-scale-up" uk-slider>
-            <ul class="uk-slider-items">
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/travel/philippines.jpg" alt="Philippines" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Philippines</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/travel/japan.jpg" alt="Japan" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Japan</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/travel/uganda.jpg" alt="Uganda" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Uganda</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/travel/switzerland.jpg" alt="Switzerland" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Switzerland</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/travel/amsterdam.jpg" alt="Amsterdam" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Amsterdam</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/travel/dubai.jpg" alt="Dubai" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Dubai</span></div></div></div></li>
-            </ul>
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-          </div>
-        </div>
-        <!-- Food slider -->
-        <div id="food-slider" class="slider-grid" style="display:none;grid-row:1/3;grid-column:2/5;height:fit-content">
-          <div class="uk-position-relative uk-visible-toggle uk-light uk-slider-container uk-animation-scale-up" uk-slider>
-            <ul class="uk-slider-items">
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/nanay.jpg" alt="Filipino food at Grandma's house" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Filipino Food @ Grandma's house</u></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/hot-chicken.jpg" alt="Nashville Hot Chicken at Howlin Ray's" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Nashville Hot Chicken @ <i>Howlin Ray's, CA</i></u></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/dumplings.jpg" alt="Dumplings at XLB Dumpling Bar" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Dumplings @ <i>XLB Dumpling Bar, CA</i></u></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/bbq.jpg" alt="BBQ at Joe's Kansas Bar-B-Que" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>BBQ @ <i>Joe's Kansas Bar-B-Que, KS</i></u></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/ramen.jpg" alt="Ramen at Ichiran Ramen Japan" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Ramen @ <i>Ichiran Ramen, Japan</i></u></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/tacos.jpg" alt="Tacos at Los Tacos No.1 New York" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Tacos @ <i>Los Tacos No.1, New York</i></u></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/poke.jpg" alt="Poke at Pokinometry CA" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Poke @ <i>Pokinometry, CA</i></u></span></div></div></div></li>
-            </ul>
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-          </div>
-        </div>
-        <!-- Sports slider -->
-        <div id="sports-slider" class="slider-grid" style="display:none;grid-row:1/3;grid-column:2/5;height:fit-content">
-          <div class="uk-position-relative uk-visible-toggle uk-light uk-slider-container uk-animation-scale-up" uk-slider>
-            <ul class="uk-slider-items">
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/basketball.jpg" alt="Basketball" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Basketball</u></span><br><span class="slide-caption"><i>High School Senior Night</i></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/esports.jpg" alt="E-Sports" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>E-Sports</u></span><br><span class="slide-caption"><i>Favorite League of Legends Players: Marin and Faker</i></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/gsw.jpg" alt="Golden State Warriors" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Golden State Warriors</u></span><br><span class="slide-caption"><i>Favorite NBA Team</i></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/tennis.jpg" alt="Tennis" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Tennis</u></span><br><span class="slide-caption"><i>Favorite Tennis Players: Nadal and Federer</i></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/badminton.jpg" alt="Badminton" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Badminton</u></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/golf.jpg" alt="Golf" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Golf</u></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/fishing.jpg" alt="Fishing" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Fishing</u></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/snowboarding.jpg" alt="Snowboarding" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Snowboarding</u></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/bowling.jpg" alt="Bowling" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Bowling</u></span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/biking.jpg" alt="Biking" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption"><u>Biking</u></span></div></div></div></li>
-            </ul>
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-          </div>
-        </div>
-        <!-- Music slider -->
-        <div id="music-slider" class="slider-grid" style="display:none;grid-row:1/3;grid-column:2/5;height:fit-content">
-          <div class="uk-position-relative uk-visible-toggle uk-light uk-slider-container uk-animation-scale-up" uk-slider>
-            <ul class="uk-slider-items">
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/ariana-grande.jpg" alt="Ariana Grande" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Ariana Grande</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/blackpink.jpg" alt="BLACKPINK" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">BLΛƆKPIИK</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/zedd.jpg" alt="Zedd" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Zedd</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/avicii.jpg" alt="Avicii" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Avicii</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/iu.jpg" alt="IU" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">IU</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/kygo.jpg" alt="Kygo" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Kygo</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/twice.jpg" alt="TWICE" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">TWICE</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/childish-gambino.jpg" alt="Childish Gambino" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Childish Gambino</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/ed-sheeran.jpg" alt="Ed Sheeran" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">Ed Sheeran</span></div></div></div></li>
-              <li class="uk-width-3-4 uk-transition-toggle"><div class="uk-cover-container"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/illenium.jpg" alt="ILLENIUM" loading="lazy"><div class="uk-position-bottom uk-panel"><div class="uk-overlay uk-light uk-position-bottom uk-transition-slide-bottom-small"><span class="slide-caption">ILLENIUM</span></div></div></div></li>
-            </ul>
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <section id="projects">
-
-      <div id="project-1" class="project uk-section uk-section-muted"
-           uk-scrollspy="target:>img,>h3,>p,>div; cls:uk-animation-slide-right-medium; delay:400">
-        <img src="/assets/images/projects/pihp.jpg" alt="Screenshot of Pihp application" width="400" height="auto">
-        <h3>Pihp</h3>
-        <p>There's been plenty of times when I'm with friends or family, and we cannot collectively decide
-        on a place to eat at. What tends to happen is that one person starts randomly naming restaurants
-        while some swipe left<i>(say no)</i> and others swipe right<i>(say yes)</i>. Pihp forces everyone
-        to be a bit more decisive through a draft and an assortment of information.</p>
-        <div class="read-more-grid">
-          <hr>
-          <button id="read-more-btn" class="uk-button uk-button-secondary">Read More</button>
-          <hr>
-        </div>
-        <p id="pihp-info-1" style="display:none">This is definitely my biggest and proudest project so far.
-        I wanted to build this application for the last two years. After multiple attempts, failing because
-        my skillset was not quite there yet, I finally got it out of the ground in the beginning of 2020.
-        Although, I might have bitten off more than I could chew but I learned an incredible amount. I had
-        become familiar with front-end tech, back-end tech, and databases individually from college courses,
-        but not as one unit. In addition, there was much more to JavaScript<i>(luckily, I chose it for both
-        front-end and back-end)</i> than I anticipated. One concept that particularly gave me a headache were
-        promises and async/await. There were parts I naively overlooked that drastically affected the
-        application design like 3<sup>rd</sup> party API costs, limits, and ToS (Terms of Service).</p>
-        <div class="project-tech">
-          <span class="uk-badge">Vue</span> <span class="uk-badge">Vuex</span>
-          <span class="uk-badge">Vue-Router</span> <span class="uk-badge">Vuetify</span>
-          <span class="uk-badge">Vue Test Utils</span> <span class="uk-badge">Jest</span>
-          <span class="uk-badge">NPM</span> <span class="uk-badge">JavaScript</span>
-          <span class="uk-badge">HTML5</span> <span class="uk-badge">CSS3</span>
-          <span class="uk-badge">Firebase</span> <span class="uk-badge">RESTful APIs</span>
-          <span class="uk-badge">Cache</span> <span class="uk-badge">NoSQL</span>
-          <span class="uk-badge">Document-Oriented Database</span>
-          <span class="uk-badge">Express</span> <span class="uk-badge">Node.js</span>
-        </div>
-        <div class="project-buttons">
-          <a href="https://pihp-db.web.app/" target="_blank" class="uk-button uk-button-default">
-            <i class="fab fa-github"></i> Site
-          </a>
-          <a href="https://youtu.be/ywLP_dbg_dQ" target="_blank" class="uk-button uk-button-default">
-            Demo
-          </a>
-        </div>
+      <div class="terminal" aria-hidden="true">
+        <span class="terminal-line"><span class="terminal-prompt">&gt;</span> whoami</span>
+        <span class="terminal-out">beau — turning curiosity into web apps since a very ill-advised veterinary detour</span>
       </div>
 
-      <div id="project-2" class="project"
-           uk-scrollspy="target:>img,>h3,>p,>div; cls:uk-animation-slide-right-medium; delay:400">
-        <img src="/assets/images/projects/type-racing.jpg" alt="Screenshot of Type Racing Game" width="400" height="auto" style="border:1px solid">
-        <h3>Type Racing Game</h3>
-        <p>I've always loved typing games ever since I had to practice typing in elementary computer lab.
-        It was also racecar themed, which made me practice more so I can get the cooler and faster cars.
-        Fast forward to university, I had an opportunity to create a browser typing game with three other
-        classmates. It was fun because I had awesome classmates, but we only designed it as a solo game.
-        After graduation, I decided to take it one step further and make it multiplayer to refine and
-        expand my back-end skill set.</p>
-        <div class="project-tech">
-          <span class="uk-badge">Multiplayer</span> <span class="uk-badge">Express</span>
-          <span class="uk-badge">Node.js</span> <span class="uk-badge">Webpack</span>
-          <span class="uk-badge">Socket.io</span> <span class="uk-badge">Websockets</span>
-          <span class="uk-badge">Phaser 3</span> <span class="uk-badge">JavaScript</span>
-        </div>
-        <div class="project-buttons">
-          <a href="https://github.com/beaubadilla/typing-frontend" target="_blank" class="uk-button uk-button-default">
-            <i class="fab fa-github"></i> Source
-          </a>
-          <a href="https://beaubadilla.github.io/typing-frontend/" target="_blank" class="uk-button uk-button-default">
-            Demo
-          </a>
-        </div>
-      </div>
-
-      <div id="project-3" class="project"
-           uk-scrollspy="target:>img,>h3,>p,>div; cls:uk-animation-slide-right-medium; delay:400">
-        <img src="/assets/images/projects/restful-apis.png" alt="Screenshot of Music Platform APIs" width="400" height="auto">
-        <h3>Music Platform Application Program Interfaces (APIs)</h3>
-        <p>Ever wondered how music applications like Spotify or iTunes work behind the scenes? For my
-        back-end engineering university course, we essentially pretended we were working for the companies
-        that created them. My group replicated how we think those applications function. On top of that,
-        responsibilities and tasks were formally divided by our professor to the role (developer, operations)
-        we assigned ourselves.</p>
-        <div class="project-tech">
-          <span class="uk-badge">Python 3.x</span> <span class="uk-badge">ScyllaDB</span>
-          <span class="uk-badge">SQL</span> <span class="uk-badge">NoSQL</span>
-          <span class="uk-badge">Wide-Column Database</span> <span class="uk-badge">Kong API Gateway</span>
-          <span class="uk-badge">Curl</span> <span class="uk-badge">Flask</span>
-          <span class="uk-badge">SQLite</span>
-        </div>
-        <div class="project-buttons">
-          <a href="https://github.com/beaubadilla/cpsc449_backend_engineering" target="_blank" class="uk-button uk-button-default">
-            <i class="fab fa-github"></i> Source
-          </a>
-        </div>
-      </div>
-
-      <div id="project-4" class="project uk-section uk-section-muted"
-           uk-scrollspy="target:>img,>h3,>p,>div; cls:uk-animation-slide-right-medium; delay:400">
-        <img src="/assets/images/projects/tcpvsudp.jpg" alt="Diagram of TCP vs UDP network protocols" width="400" height="auto">
-        <h3>Network Protocols</h3>
-        <p>Not often did I have to care about how my data is transferred, during both coding and casually
-        using the internet. Having to work at a lower layer of the networking system has provided
-        perspective on where and how my data is traveling. The biggest takeaway after learning about the
-        different protocols is how exceptional they perform under the right use case.</p>
-        <div class="project-tech">
-          <span class="uk-badge">Python 3.x</span> <span class="uk-badge">Sockets</span>
-          <span class="uk-badge">Hash Algorithms</span> <span class="uk-badge">Selectors</span>
-          <span class="uk-badge">Multiplex</span>
-          <span class="uk-badge">User Datagram Protocol (UDP)</span>
-          <span class="uk-badge">Transmission Control Protocol (TCP)</span>
-          <span class="uk-badge">Message Digests</span> <span class="uk-badge">Checksums</span>
-        </div>
-        <div class="project-buttons">
-          <a href="https://github.com/beaubadilla/cpsc471_computer_networking" target="_blank" class="uk-button uk-button-default">
-            <i class="fab fa-github"></i> Source
-          </a>
-        </div>
-      </div>
-
-    </section>
-
-    <section id="contact">
-      <h3 id="contact-hook">
-        Looking for a dev? Got a cool project in mind?<br>
-        Want to recommend a song <i class="fas fa-headphones-alt fa-xs"></i>?
-        movie <i class="fas fa-video fa-xs"></i>?
-        cafe <i class="fas fa-coffee fa-xs"></i>?
-      </h3>
-      <h2 id="contact-header">Connect with me!</h2>
-      <div id="contact-links">
-        <div id="links-social">
-          <a href="mailto:beau.badilla@gmail.com">
-            <div id="link-email">
-              <i class="fas fa-envelope fa-2x fa-fw"></i>
-              <div>beau.badilla@gmail.com</div>
-            </div>
-          </a>
-          <a href="https://github.com/beaubadilla" target="_blank">
-            <div id="link-github">
-              <i class="fab fa-github fa-2x fa-fw"></i>
-              <div>github.com/beaubadilla</div>
-            </div>
-          </a>
-          <a href="https://www.linkedin.com/in/beau-jayme-badilla/" target="_blank">
-            <div id="link-linkedin">
-              <i class="fab fa-linkedin fa-2x fa-fw"></i>
-              <div>linkedin.com/in/beau-jayme-badilla</div>
-            </div>
-          </a>
-          <div id="link-discord">
-            <i class="fab fa-discord fa-2x fa-fw"></i>
-            <div>Beau#4156</div>
-          </div>
-        </div>
-
-        <hr id="links-line" class="uk-divider-vertical">
-
-        <div id="links-fun">
-          <a href="https://open.spotify.com/user/junkzfoo" target="_blank">
-            <div id="link-spotify">
-              <i class="fab fa-spotify fa-2x fa-fw"></i>
-              <div>open.spotify.com/user/junkzfoo</div>
-            </div>
-          </a>
-          <div id="link-blizzard">
-            <img src="/assets/images/platforms/blizzard.png" alt="Battle.net" width="35" height="auto">
-            <div>beauJB#1794</div>
-          </div>
-          <div id="link-riot">
-            <img src="/assets/images/platforms/riot.png" alt="Riot Games" width="32" height="auto">
-            <div>JennMandu#NA1</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="resume">
-      <h3>Resume</h3>
-      <div>
-        <a href="https://drive.google.com/file/d/194p-GwHTyRJbz2E1duqScSD1SFZvJvo7/view?usp=sharing"
-           target="_blank" class="uk-button uk-button-default">
-          <i class="fas fa-cloud"></i> View Online
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">See my work</a>
+        <a class="btn" href="https://github.com/beaubadilla" target="_blank" rel="noopener">
+          <svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg> GitHub
         </a>
-        <a href="/resume.pdf" download class="uk-button uk-button-default">
-          Download <i class="fas fa-download"></i>
+        <a class="btn" href="https://www.linkedin.com/in/beau-jayme-badilla/" target="_blank" rel="noopener">
+          <svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg> LinkedIn
+        </a>
+        <a class="btn" href="mailto:beau.badilla@gmail.com">
+          <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg> Email
         </a>
       </div>
-    </section>
+    </div>
 
-  </main>
+    <div class="hero-media">
+      <img src="https://beaujb-website.s3.amazonaws.com/profile/cover-photo.jpg"
+           alt="Beau Badilla in Japan" loading="eager" width="800" height="900">
+    </div>
+  </section>
 
-  <footer>
-    <div>Built with UIkit, Font Awesome</div>
-    <div>Special thanks to FreeCodeCamp and TheOdinProject</div>
-    <div>&copy; 2025 Beau Jayme Badilla</div>
-  </footer>
+  <!-- =========================================================
+       About + Tech stack
+       ========================================================= -->
+  <section id="about" class="section">
+    <div class="section-head reveal">
+      <span class="section-index">01</span>
+      <h2>About</h2>
+    </div>
 
-</div>
+    <div class="about-grid">
+      <div class="about-bio reveal">
+        <p>I found computer science by accident. I was on a veterinarian track in community college
+        until an intro programming course completely redirected me — and I've been building ever since.</p>
+        <p>What keeps me here is that web apps are a license to learn anything. Whenever I get curious
+        about a new subject, I build something around it. I'm not claiming to be a standout engineer yet,
+        but I'm relentlessly working to become one.</p>
+      </div>
+
+      <div class="tech reveal">
+        <h3 class="tech-heading">Tech stack</h3>
+
+        <div class="tech-group">
+          <span class="tech-label">frontend</span>
+          <ul class="tech-list">
+            <li><img src="/assets/images/tech/javascript.png" alt="" width="28" height="28"> JavaScript</li>
+            <li><img src="/assets/images/tech/vue.png" alt="" width="28" height="28"> Vue</li>
+            <li><img src="/assets/images/tech/vuetify.png" alt="" width="28" height="28"> Vuetify</li>
+            <li><img src="/assets/images/tech/html5.png" alt="" width="28" height="28"> HTML5</li>
+            <li><img src="/assets/images/tech/css3.png" alt="" width="28" height="28"> CSS3</li>
+            <li><img src="/assets/images/tech/jest.png" alt="" width="28" height="28"> Jest</li>
+          </ul>
+        </div>
+
+        <div class="tech-group">
+          <span class="tech-label">backend</span>
+          <ul class="tech-list">
+            <li><img src="/assets/images/tech/nodejs.svg" alt="" width="28" height="28"> Node.js</li>
+            <li><img src="/assets/images/tech/express.png" alt="" width="28" height="28"> Express</li>
+            <li><img src="/assets/images/tech/python.png" alt="" width="28" height="28"> Python</li>
+          </ul>
+        </div>
+
+        <div class="tech-group">
+          <span class="tech-label">data</span>
+          <ul class="tech-list">
+            <li><img src="/assets/images/tech/firebase.png" alt="" width="28" height="28"> Firebase</li>
+            <li><img src="/assets/images/tech/scylladb.png" alt="" width="28" height="28"> ScyllaDB</li>
+            <li><img src="/assets/images/tech/sqlite.png" alt="" width="28" height="28"> SQLite</li>
+          </ul>
+        </div>
+
+        <div class="tech-group">
+          <span class="tech-label">tooling</span>
+          <ul class="tech-list">
+            <li><img src="/assets/images/tech/git.png" alt="" width="28" height="28"> Git</li>
+            <li><img src="/assets/images/tech/github.png" alt="" width="28" height="28"> GitHub</li>
+            <li><img src="/assets/images/tech/aws.png" alt="" width="28" height="28"> AWS</li>
+            <li><img src="/assets/images/tech/heroku.jpg" alt="" width="28" height="28"> Heroku</li>
+            <li><img src="/assets/images/tech/linux.png" alt="" width="28" height="28"> Linux</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       Projects
+       ========================================================= -->
+  <section id="projects" class="section">
+    <div class="section-head reveal">
+      <span class="section-index">02</span>
+      <h2>Projects</h2>
+    </div>
+
+    <div class="projects">
+      <article class="project reveal">
+        <div class="project-media">
+          <img src="/assets/images/projects/pihp.jpg" alt="Screenshot of the Pihp application" loading="lazy" width="400" height="250">
+        </div>
+        <div class="project-body">
+          <h3>Pihp</h3>
+          <p>Deciding where to eat with a group is chaos — someone rattles off restaurants while everyone
+          swipes yes or no. Pihp forces the group to be decisive through a draft and a spread of info about
+          each spot. It's the biggest, proudest thing I've built.</p>
+          <p class="project-more" id="pihp-more" hidden>I wanted to build this for two years, failing a few
+          times because my skills weren't there yet, before it finally got off the ground. I'd learned
+          front-end, back-end, and databases as separate college topics — never as one unit — and there was
+          far more to JavaScript than I expected (promises and async/await gave me a proper headache). I also
+          learned the hard way how much third-party API costs, limits, and terms of service can shape an
+          application's whole design.</p>
+          <button class="link-btn" id="pihp-toggle" aria-expanded="false" aria-controls="pihp-more">Read more</button>
+          <ul class="tags">
+            <li>Vue</li><li>Vuex</li><li>Vue-Router</li><li>Vuetify</li><li>Jest</li>
+            <li>JavaScript</li><li>Firebase</li><li>Express</li><li>Node.js</li><li>REST</li>
+          </ul>
+          <div class="project-links">
+            <a class="btn btn-sm" href="https://pihp-db.web.app/" target="_blank" rel="noopener">Live site <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></a>
+            <a class="btn btn-sm" href="https://youtu.be/ywLP_dbg_dQ" target="_blank" rel="noopener">Demo <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-media">
+          <img src="/assets/images/projects/type-racing.jpg" alt="Screenshot of the Type Racing game" loading="lazy" width="400" height="250">
+        </div>
+        <div class="project-body">
+          <h3>Type Racing Game</h3>
+          <p>I've loved typing games since racing cars around an elementary computer lab. At university I built
+          a browser typing game with three classmates as a solo-play experience; after graduation I took it
+          further and made it multiplayer to sharpen my back-end skills.</p>
+          <ul class="tags">
+            <li>Multiplayer</li><li>Express</li><li>Node.js</li><li>Webpack</li>
+            <li>Socket.io</li><li>WebSockets</li><li>Phaser 3</li><li>JavaScript</li>
+          </ul>
+          <div class="project-links">
+            <a class="btn btn-sm" href="https://github.com/beaubadilla/typing-frontend" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg> Source</a>
+            <a class="btn btn-sm" href="https://beaubadilla.github.io/typing-frontend/" target="_blank" rel="noopener">Demo <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-media">
+          <img src="/assets/images/projects/restful-apis.png" alt="Screenshot of the music platform APIs" loading="lazy" width="400" height="250">
+        </div>
+        <div class="project-body">
+          <h3>Music Platform APIs</h3>
+          <p>Ever wondered how Spotify or iTunes work behind the scenes? For a back-end engineering course my
+          group played the part of the companies building them and replicated how we thought those platforms
+          function — with responsibilities split across developer and operations roles.</p>
+          <ul class="tags">
+            <li>Python</li><li>ScyllaDB</li><li>SQL</li><li>NoSQL</li>
+            <li>Kong API Gateway</li><li>Flask</li><li>SQLite</li>
+          </ul>
+          <div class="project-links">
+            <a class="btn btn-sm" href="https://github.com/beaubadilla/cpsc449_backend_engineering" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg> Source</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-media">
+          <img src="/assets/images/projects/tcpvsudp.jpg" alt="Diagram of TCP vs UDP network protocols" loading="lazy" width="400" height="250">
+        </div>
+        <div class="project-body">
+          <h3>Network Protocols</h3>
+          <p>I rarely had to think about how my data actually travels. Working a few layers lower gave me real
+          perspective on where and how it moves — and how exceptional each protocol can be under the right use
+          case.</p>
+          <ul class="tags">
+            <li>Python</li><li>Sockets</li><li>Hashing</li><li>Selectors</li>
+            <li>Multiplexing</li><li>UDP</li><li>TCP</li><li>Checksums</li>
+          </ul>
+          <div class="project-links">
+            <a class="btn btn-sm" href="https://github.com/beaubadilla/cpsc471_computer_networking" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg> Source</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       Favorites
+       ========================================================= -->
+  <section id="favorites" class="section">
+    <div class="section-head reveal">
+      <span class="section-index">03</span>
+      <h2>Favorites</h2>
+    </div>
+    <p class="section-sub reveal">A little of what I love outside of code. Pick a category.</p>
+
+    <div class="fav-grid reveal" role="group" aria-label="Favorite categories">
+      <button class="fav-tile" data-category="movies"  aria-expanded="false" aria-controls="fav-panel"><svg class="icon" aria-hidden="true"><use href="#i-film"></use></svg><span>Movies</span></button>
+      <button class="fav-tile" data-category="shows"   aria-expanded="false" aria-controls="fav-panel"><svg class="icon" aria-hidden="true"><use href="#i-tv"></use></svg><span>Shows</span></button>
+      <button class="fav-tile" data-category="sports"  aria-expanded="false" aria-controls="fav-panel"><svg class="icon" aria-hidden="true"><use href="#i-activity"></use></svg><span>Sports</span></button>
+      <button class="fav-tile" data-category="food"    aria-expanded="false" aria-controls="fav-panel"><svg class="icon" aria-hidden="true"><use href="#i-utensils"></use></svg><span>Food</span></button>
+      <button class="fav-tile" data-category="games"   aria-expanded="false" aria-controls="fav-panel"><svg class="icon" aria-hidden="true"><use href="#i-gamepad"></use></svg><span>Games</span></button>
+      <button class="fav-tile" data-category="travel"  aria-expanded="false" aria-controls="fav-panel"><svg class="icon" aria-hidden="true"><use href="#i-plane"></use></svg><span>Travel</span></button>
+      <button class="fav-tile" data-category="anime"   aria-expanded="false" aria-controls="fav-panel"><svg class="icon" aria-hidden="true"><use href="#i-sparkles"></use></svg><span>Anime</span></button>
+      <button class="fav-tile" data-category="music"   aria-expanded="false" aria-controls="fav-panel"><svg class="icon" aria-hidden="true"><use href="#i-music"></use></svg><span>Music</span></button>
+    </div>
+
+    <div id="fav-panel" class="fav-panel" hidden>
+      <div class="fav-panel-head">
+        <h3 class="fav-panel-title" id="fav-panel-title"></h3>
+        <button class="link-btn fav-close" aria-label="Close favorites carousel">Close ✕</button>
+      </div>
+
+      <!-- Carousels -->
+      <div class="carousel" data-carousel="movies" hidden>
+        <button class="carousel-nav prev" aria-label="Previous"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"></use></svg></button>
+        <ul class="carousel-track">
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/avengers.jpg" alt="Marvel Cinematic Universe" loading="lazy"><span class="caption"><strong>Marvel Cinematic Universe</strong> — Top 3: Iron Man, Spider-Man: Homecoming, Thor: Ragnarok</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/lilo-stitch.jpg" alt="Disney Animation" loading="lazy"><span class="caption"><strong>Disney Animation</strong> — Top 3: Lilo &amp; Stitch, Big Hero 6, Wreck-It Ralph</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/fast-5.jpg" alt="Fast Five" loading="lazy"><span class="caption">Fast Five</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/crazy-stupid-love.jpg" alt="Crazy, Stupid, Love" loading="lazy"><span class="caption">Crazy, Stupid, Love</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/inside-out.jpg" alt="Pixar" loading="lazy"><span class="caption"><strong>Pixar</strong> — Top 3: Inside Out, Toy Story, Ratatouille</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/httyd.jpg" alt="How to Train Your Dragon" loading="lazy"><span class="caption">How to Train Your Dragon</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/social-network.jpg" alt="The Social Network" loading="lazy"><span class="caption">The Social Network</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/rush-hour.jpg" alt="Rush Hour" loading="lazy"><span class="caption">Rush Hour</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/martian.jpg" alt="The Martian" loading="lazy"><span class="caption">The Martian</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/movies/21-jump-street.jpg" alt="21/22 Jump Street" loading="lazy"><span class="caption">21 / 22 Jump Street</span></li>
+        </ul>
+        <button class="carousel-nav next" aria-label="Next"><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></button>
+      </div>
+
+      <div class="carousel" data-carousel="shows" hidden>
+        <button class="carousel-nav prev" aria-label="Previous"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"></use></svg></button>
+        <ul class="carousel-track">
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/atla-lok.jpg" alt="Avatar: The Last Airbender" loading="lazy"><span class="caption">Avatar: The Last Airbender · The Legend of Korra</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/suits.jpg" alt="Suits" loading="lazy"><span class="caption">Suits</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/mr-robot.jpg" alt="Mr. Robot" loading="lazy"><span class="caption">Mr. Robot</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/modern-family.jpg" alt="Modern Family" loading="lazy"><span class="caption">Modern Family</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/young-justice.jpg" alt="Young Justice" loading="lazy"><span class="caption">Young Justice</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/newsroom.jpg" alt="The Newsroom" loading="lazy"><span class="caption">The Newsroom</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/teen-titans.jpg" alt="Teen Titans" loading="lazy"><span class="caption">Teen Titans</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/silicon-valley.jpg" alt="Silicon Valley" loading="lazy"><span class="caption">Silicon Valley</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/brooklyn-nine-nine.jpg" alt="Brooklyn Nine-Nine" loading="lazy"><span class="caption">Brooklyn Nine-Nine</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/shows/sex-education.jpg" alt="Sex Education" loading="lazy"><span class="caption">Sex Education</span></li>
+        </ul>
+        <button class="carousel-nav next" aria-label="Next"><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></button>
+      </div>
+
+      <div class="carousel" data-carousel="sports" hidden>
+        <button class="carousel-nav prev" aria-label="Previous"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"></use></svg></button>
+        <ul class="carousel-track">
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/basketball.jpg" alt="Basketball" loading="lazy"><span class="caption"><strong>Basketball</strong> — High school senior night</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/esports.jpg" alt="E-Sports" loading="lazy"><span class="caption"><strong>E-Sports</strong> — Favorite LoL players: Marin and Faker</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/gsw.jpg" alt="Golden State Warriors" loading="lazy"><span class="caption"><strong>Golden State Warriors</strong> — Favorite NBA team</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/tennis.jpg" alt="Tennis" loading="lazy"><span class="caption"><strong>Tennis</strong> — Favorite players: Nadal and Federer</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/badminton.jpg" alt="Badminton" loading="lazy"><span class="caption">Badminton</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/golf.jpg" alt="Golf" loading="lazy"><span class="caption">Golf</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/fishing.jpg" alt="Fishing" loading="lazy"><span class="caption">Fishing</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/snowboarding.jpg" alt="Snowboarding" loading="lazy"><span class="caption">Snowboarding</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/bowling.jpg" alt="Bowling" loading="lazy"><span class="caption">Bowling</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/sports/biking.jpg" alt="Biking" loading="lazy"><span class="caption">Biking</span></li>
+        </ul>
+        <button class="carousel-nav next" aria-label="Next"><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></button>
+      </div>
+
+      <div class="carousel" data-carousel="food" hidden>
+        <button class="carousel-nav prev" aria-label="Previous"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"></use></svg></button>
+        <ul class="carousel-track">
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/nanay.jpg" alt="Filipino food at Grandma's house" loading="lazy"><span class="caption">Filipino food @ Grandma's house</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/hot-chicken.jpg" alt="Nashville hot chicken at Howlin' Ray's" loading="lazy"><span class="caption">Nashville hot chicken @ Howlin' Ray's, CA</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/dumplings.jpg" alt="Dumplings at XLB Dumpling Bar" loading="lazy"><span class="caption">Dumplings @ XLB Dumpling Bar, CA</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/bbq.jpg" alt="BBQ at Joe's Kansas City Bar-B-Que" loading="lazy"><span class="caption">BBQ @ Joe's Kansas City Bar-B-Que, KS</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/ramen.jpg" alt="Ramen at Ichiran, Japan" loading="lazy"><span class="caption">Ramen @ Ichiran, Japan</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/tacos.jpg" alt="Tacos at Los Tacos No.1, New York" loading="lazy"><span class="caption">Tacos @ Los Tacos No.1, New York</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/food/poke.jpg" alt="Poke at Pokinometry, CA" loading="lazy"><span class="caption">Poke @ Pokinometry, CA</span></li>
+        </ul>
+        <button class="carousel-nav next" aria-label="Next"><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></button>
+      </div>
+
+      <div class="carousel" data-carousel="games" hidden>
+        <button class="carousel-nav prev" aria-label="Previous"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"></use></svg></button>
+        <ul class="carousel-track">
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/league-of-legends.jpg" alt="League of Legends" loading="lazy"><span class="caption"><strong>League of Legends</strong> — Fiora, Vayne, Ziggs</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/overwatch.jpg" alt="Overwatch" loading="lazy"><span class="caption"><strong>Overwatch</strong> — Widowmaker, Tracer, Ana</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/wow.jpg" alt="World of Warcraft" loading="lazy"><span class="caption"><strong>World of Warcraft</strong> — Subtlety Rogue, Frost Mage, BM Hunter</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/arknights.jpg" alt="Arknights" loading="lazy"><span class="caption">Arknights</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/counter-strike.jpg" alt="Counter-Strike" loading="lazy"><span class="caption">Counter-Strike</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/nba2k.jpg" alt="NBA 2K" loading="lazy"><span class="caption">NBA 2K</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/valorant.jpg" alt="Valorant" loading="lazy"><span class="caption"><strong>Valorant</strong> — Jett, Breach, Cypher</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/kingdom-hearts.jpg" alt="Kingdom Hearts" loading="lazy"><span class="caption">Kingdom Hearts</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/smash-bros.jpg" alt="Super Smash Bros." loading="lazy"><span class="caption"><strong>Super Smash Bros.</strong> — Toon Link, Zelda, Luigi</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/games/maplestory.jpg" alt="MapleStory" loading="lazy"><span class="caption">MapleStory</span></li>
+        </ul>
+        <button class="carousel-nav next" aria-label="Next"><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></button>
+      </div>
+
+      <div class="carousel" data-carousel="travel" hidden>
+        <button class="carousel-nav prev" aria-label="Previous"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"></use></svg></button>
+        <ul class="carousel-track">
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/travel/philippines.jpg" alt="Philippines" loading="lazy"><span class="caption">Philippines</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/travel/japan.jpg" alt="Japan" loading="lazy"><span class="caption">Japan</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/travel/uganda.jpg" alt="Uganda" loading="lazy"><span class="caption">Uganda</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/travel/switzerland.jpg" alt="Switzerland" loading="lazy"><span class="caption">Switzerland</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/travel/amsterdam.jpg" alt="Amsterdam" loading="lazy"><span class="caption">Amsterdam</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/travel/dubai.jpg" alt="Dubai" loading="lazy"><span class="caption">Dubai</span></li>
+        </ul>
+        <button class="carousel-nav next" aria-label="Next"><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></button>
+      </div>
+
+      <div class="carousel" data-carousel="anime" hidden>
+        <button class="carousel-nav prev" aria-label="Previous"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"></use></svg></button>
+        <ul class="carousel-track">
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/sao.jpg" alt="Sword Art Online" loading="lazy"><span class="caption">Sword Art Online (all seasons)</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/fate.jpg" alt="Fate series" loading="lazy"><span class="caption">Fate/Zero · Fate/stay night: Unlimited Blade Works</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/fmab.jpg" alt="Fullmetal Alchemist: Brotherhood" loading="lazy"><span class="caption">Fullmetal Alchemist: Brotherhood</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/oregairu.jpg" alt="Oregairu" loading="lazy"><span class="caption">Oregairu (My Teen Romantic Comedy SNAFU)</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/haikyuu.jpg" alt="Haikyuu!!" loading="lazy"><span class="caption">Haikyuu!!</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/spirited-away.jpg" alt="Spirited Away" loading="lazy"><span class="caption">Spirited Away</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/digimon.jpg" alt="Digimon" loading="lazy"><span class="caption">Digimon: Digital Monsters</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/rent-a-girlfriend.jpg" alt="Rent-a-Girlfriend" loading="lazy"><span class="caption">Rent-a-Girlfriend</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/sakurasou.jpg" alt="The Pet Girl of Sakurasou" loading="lazy"><span class="caption">The Pet Girl of Sakurasou</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/anime/no-game-no-life.jpg" alt="No Game No Life" loading="lazy"><span class="caption">No Game No Life</span></li>
+        </ul>
+        <button class="carousel-nav next" aria-label="Next"><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></button>
+      </div>
+
+      <div class="carousel" data-carousel="music" hidden>
+        <button class="carousel-nav prev" aria-label="Previous"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"></use></svg></button>
+        <ul class="carousel-track">
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/ariana-grande.jpg" alt="Ariana Grande" loading="lazy"><span class="caption">Ariana Grande</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/blackpink.jpg" alt="BLACKPINK" loading="lazy"><span class="caption">BLACKPINK</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/zedd.jpg" alt="Zedd" loading="lazy"><span class="caption">Zedd</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/avicii.jpg" alt="Avicii" loading="lazy"><span class="caption">Avicii</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/iu.jpg" alt="IU" loading="lazy"><span class="caption">IU</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/kygo.jpg" alt="Kygo" loading="lazy"><span class="caption">Kygo</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/twice.jpg" alt="TWICE" loading="lazy"><span class="caption">TWICE</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/childish-gambino.jpg" alt="Childish Gambino" loading="lazy"><span class="caption">Childish Gambino</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/ed-sheeran.jpg" alt="Ed Sheeran" loading="lazy"><span class="caption">Ed Sheeran</span></li>
+          <li class="slide"><img src="https://beaujb-website.s3.amazonaws.com/favorites/music/illenium.jpg" alt="ILLENIUM" loading="lazy"><span class="caption">ILLENIUM</span></li>
+        </ul>
+        <button class="carousel-nav next" aria-label="Next"><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       Contact
+       ========================================================= -->
+  <section id="contact" class="section">
+    <div class="section-head reveal">
+      <span class="section-index">04</span>
+      <h2>Contact</h2>
+    </div>
+    <p class="section-sub reveal">
+      Looking for a dev? Got a cool project in mind? Want to recommend a song, a movie, or a cafe?
+      Let's connect.
+    </p>
+
+    <div class="contact-grid reveal">
+      <a class="contact-card" data-brand="email" href="mailto:beau.badilla@gmail.com">
+        <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
+        <span class="contact-label">Email</span>
+        <span class="contact-value">beau.badilla@gmail.com</span>
+      </a>
+      <a class="contact-card" data-brand="github" href="https://github.com/beaubadilla" target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg>
+        <span class="contact-label">GitHub</span>
+        <span class="contact-value">github.com/beaubadilla</span>
+      </a>
+      <a class="contact-card" data-brand="linkedin" href="https://www.linkedin.com/in/beau-jayme-badilla/" target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg>
+        <span class="contact-label">LinkedIn</span>
+        <span class="contact-value">in/beau-jayme-badilla</span>
+      </a>
+      <a class="contact-card" data-brand="spotify" href="https://open.spotify.com/user/junkzfoo" target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#i-spotify"></use></svg>
+        <span class="contact-label">Spotify</span>
+        <span class="contact-value">user/junkzfoo</span>
+      </a>
+      <div class="contact-card is-static" data-brand="discord">
+        <svg class="icon" aria-hidden="true"><use href="#i-discord"></use></svg>
+        <span class="contact-label">Discord</span>
+        <span class="contact-value">beaujb</span>
+      </div>
+      <div class="contact-card is-static" data-brand="blizzard">
+        <img class="contact-img" src="/assets/images/platforms/blizzard.png" alt="Battle.net" width="28" height="28">
+        <span class="contact-label">Battle.net</span>
+        <span class="contact-value">beauJB#1794</span>
+      </div>
+      <div class="contact-card is-static" data-brand="riot">
+        <img class="contact-img" src="/assets/images/platforms/riot.png" alt="Riot Games" width="28" height="28">
+        <span class="contact-label">Riot</span>
+        <span class="contact-value">JennMandu#NA1</span>
+      </div>
+    </div>
+
+    <div class="resume reveal">
+      <span class="resume-label">Résumé</span>
+      <div class="resume-actions">
+        <a class="btn" href="https://drive.google.com/file/d/194p-GwHTyRJbz2E1duqScSD1SFZvJvo7/view?usp=sharing" target="_blank" rel="noopener">View online <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></a>
+        <a class="btn btn-primary" href="/resume.pdf" download>Download <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>Built by hand — HTML, CSS &amp; vanilla JS.</span>
+    <span>Thanks to freeCodeCamp &amp; The Odin Project.</span>
+    <span>&copy; <span id="year">2026</span> Beau Jayme Badilla</span>
+  </div>
+</footer>
 
 <script src="/assets/js/main.js"></script>
 </body>

@@ -1,138 +1,152 @@
 'use strict';
 
-const S3 = 'https://beaujb-website.s3.amazonaws.com';
-
-const CATEGORIES = ['movies', 'shows', 'sports', 'food', 'music', 'games', 'travel', 'anime'];
-
-const TECH_STACK_IDS = [
-  'javascript-img', 'vue-img', 'vuetify-img', 'html5-img', 'css3-img', 'jest-img',
-  'express-img', 'python-img',
-  'firebase-img', 'scylladb-img', 'sqlite-img',
-  'linux-img', 'windows-img',
-  'aws-img', 'nodejs-img', 'github-img', 'git-img', 'heroku-img',
-];
-
-let techStackAnimating = false;
-
 /* =========================================================
-   Navigation toggle
+   Theme toggle  (persisted, respects system preference)
    ========================================================= */
-function toggleNav() {
-  document.getElementById('nav').classList.toggle('is-open');
-}
+function setupTheme() {
+  const root = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
 
-/* =========================================================
-   Favorites slider
-   ========================================================= */
-function displaySlider(tile) {
-  const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-  const category = tile.dataset.category;
-  const slider = document.getElementById(`${category}-slider`);
-  const favGrid = document.getElementById('favorites');
-  const isOpen = favGrid.dataset.activeSlider === category;
+  const sync = () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    btn.setAttribute('aria-pressed', String(isDark));
+    btn.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+  };
 
-  if (isOpen) {
-    /* Close the open slider */
-    slider.style.display = 'none';
-    CATEGORIES.forEach(c => {
-      const el = document.getElementById(c);
-      el.style.display = 'flex';
-      el.style.gridArea = '';
-    });
-    favGrid.dataset.activeSlider = '';
-    tile.classList.remove('uk-animation-scale-up');
-    tile.classList.add('uk-animation-scale-down');
-  } else {
-    /* Close any previously open slider */
-    if (favGrid.dataset.activeSlider) {
-      const prev = favGrid.dataset.activeSlider;
-      document.getElementById(`${prev}-slider`).style.display = 'none';
-      CATEGORIES.forEach(c => {
-        const el = document.getElementById(c);
-        el.style.display = 'flex';
-        el.style.gridArea = '';
-      });
-    }
-
-    /* Open this slider */
-    const row = tile.dataset.row;
-    const col = tile.dataset.col;
-
-    if (vw > 550) {
-      tile.style.gridArea = `${row} / ${col} / span 2 / span 1`;
-      slider.style.gridArea = `${row} / ${parseInt(col) < 4 ? parseInt(col) + 1 : parseInt(col) - 1} / span 2 / span 3`;
-      /* Rearrange remaining tiles out of the way */
-      CATEGORIES.filter(c => c !== category).forEach(c => {
-        document.getElementById(c).style.display = 'none';
-      });
-      slider.style.gridArea = `${row} / 1 / span 2 / span 4`;
-      tile.style.gridArea = '';
-    } else {
-      slider.style.gridArea = '2 / 1 / span 1 / span 4';
-    }
-
-    CATEGORIES.filter(c => c !== category).forEach(c => {
-      document.getElementById(c).style.display = 'none';
-    });
-
-    slider.style.display = 'block';
-    tile.style.display = 'flex';
-    tile.classList.remove('uk-animation-scale-down');
-    tile.classList.add('uk-animation-scale-up');
-    favGrid.dataset.activeSlider = category;
-  }
-}
-
-/* =========================================================
-   Project "Read More"
-   ========================================================= */
-function showMoreProjectInfo() {
-  const info = document.getElementById('pihp-info-1');
-  const btn  = document.getElementById('read-more-btn');
-  const hidden = info.style.display === 'none' || info.style.display === '';
-  info.style.display = hidden ? 'block' : 'none';
-  btn.textContent    = hidden ? 'Read Less' : 'Read More';
-}
-
-/* =========================================================
-   Tech stack tooltip stagger
-   ========================================================= */
-function showAllTStackTooltips() {
-  if (techStackAnimating) return;
-  techStackAnimating = true;
-  const STEP = 500;
-  TECH_STACK_IDS.forEach((id, i) => {
-    setTimeout(() => {
-      const el = document.getElementById(id);
-      if (el) UIkit.tooltip(el).show();
-    }, STEP * (i + 1));
+  btn.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    sync();
   });
-  setTimeout(() => {
-    const last = document.getElementById(TECH_STACK_IDS[TECH_STACK_IDS.length - 1]);
-    if (last) UIkit.tooltip(last).hide();
-    techStackAnimating = false;
-  }, STEP * (TECH_STACK_IDS.length + 1));
+
+  sync();
 }
 
 /* =========================================================
-   Wire up all event listeners
+   Mobile navigation
+   ========================================================= */
+function setupNav() {
+  const btn = document.getElementById('nav-toggle');
+  const menu = document.getElementById('nav-menu');
+  if (!btn || !menu) return;
+
+  const close = () => {
+    menu.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Open menu');
+  };
+
+  btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+}
+
+/* =========================================================
+   Favorites — expand a category into a carousel
+   ========================================================= */
+function setupFavorites() {
+  const tiles = document.querySelectorAll('.fav-tile');
+  const panel = document.getElementById('fav-panel');
+  const title = document.getElementById('fav-panel-title');
+  const closeBtn = document.querySelector('.fav-close');
+  if (!tiles.length || !panel) return;
+
+  const carousels = panel.querySelectorAll('.carousel');
+
+  const closeAll = () => {
+    tiles.forEach(t => t.setAttribute('aria-expanded', 'false'));
+    carousels.forEach(c => (c.hidden = true));
+    panel.hidden = true;
+  };
+
+  tiles.forEach(tile => {
+    tile.addEventListener('click', () => {
+      const category = tile.dataset.category;
+      const isActive = tile.getAttribute('aria-expanded') === 'true';
+      closeAll();
+      if (isActive) return;
+
+      tile.setAttribute('aria-expanded', 'true');
+      const carousel = panel.querySelector(`.carousel[data-carousel="${category}"]`);
+      if (carousel) carousel.hidden = false;
+      if (title) title.textContent = tile.querySelector('span').textContent;
+      panel.hidden = false;
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeAll);
+
+  /* Carousel prev/next — scroll by one slide */
+  carousels.forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    const slide = carousel.querySelector('.slide');
+    if (!track || !slide) return;
+    const step = () => slide.getBoundingClientRect().width + 16; /* slide + gap */
+    const prev = carousel.querySelector('.carousel-nav.prev');
+    const next = carousel.querySelector('.carousel-nav.next');
+    if (prev) prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    if (next) next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+  });
+}
+
+/* =========================================================
+   Project "Read more" toggle
+   ========================================================= */
+function setupReadMore() {
+  const btn = document.getElementById('pihp-toggle');
+  const more = document.getElementById('pihp-more');
+  if (!btn || !more) return;
+
+  btn.addEventListener('click', () => {
+    const open = more.hidden;
+    more.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.textContent = open ? 'Read less' : 'Read more';
+  });
+}
+
+/* =========================================================
+   Scroll reveal
+   ========================================================= */
+function setupReveals() {
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+
+  if (!('IntersectionObserver' in window) ||
+      matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+
+  els.forEach(el => io.observe(el));
+}
+
+/* =========================================================
+   Boot
    ========================================================= */
 document.addEventListener('DOMContentLoaded', () => {
-  /* Nav toggle */
-  const navBtn = document.getElementById('nav-button');
-  if (navBtn) navBtn.addEventListener('click', toggleNav);
+  setupTheme();
+  setupNav();
+  setupFavorites();
+  setupReadMore();
+  setupReveals();
 
-  /* Favorites tiles */
-  CATEGORIES.forEach(cat => {
-    const tile = document.getElementById(cat);
-    if (tile) tile.addEventListener('click', () => displaySlider(tile));
-  });
-
-  /* Tech stack tooltip stagger on heading hover */
-  const tstackHeading = document.getElementById('tech-stack-heading');
-  if (tstackHeading) tstackHeading.addEventListener('mouseenter', showAllTStackTooltips);
-
-  /* Read More button */
-  const readMoreBtn = document.getElementById('read-more-btn');
-  if (readMoreBtn) readMoreBtn.addEventListener('click', showMoreProjectInfo);
+  const year = document.getElementById('year');
+  if (year) year.textContent = String(new Date().getFullYear());
 });
