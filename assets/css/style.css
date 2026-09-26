@@ -261,7 +261,7 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; font-weight: 7
   box-shadow: var(--shadow);
   aspect-ratio: 4 / 5;
 }
-.hero-media img { width: 100%; height: 100%; object-fit: cover; }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 95% center; }
 .hero-media::after {
   content: "";
   position: absolute;
